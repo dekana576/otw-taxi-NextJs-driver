@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  faEye,
+  faPenToSquare,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
   Button,
   Card,
   CardBody,
@@ -30,7 +36,6 @@ interface Iuser {
 }
 
 export default function Home() {
-
   const [page, setPage] = useState(1);
   const rowsPerPage = 5;
 
@@ -59,14 +64,12 @@ export default function Home() {
   return (
     <div className="w-full justify-center items-center flex flex-col">
       <div className="w-200">
-
         <div className="h-100 overflow-hidden justify-center items-center flex rounded-2xl my-5">
           <Image src="/img/image.png" alt="banner" />
         </div>
 
         <div className="my-5">
           <Card>
-
             <CardHeader>
               <div className="w-full flex items-center justify-end">
                 <Button className="m-3" variant="ghost" color="warning">
@@ -76,7 +79,6 @@ export default function Home() {
             </CardHeader>
 
             <CardBody>
-
               <Table
                 isStriped
                 aria-label="Users table"
@@ -92,7 +94,6 @@ export default function Home() {
                   </div>
                 }
               >
-
                 <TableHeader>
                   <TableColumn>NAME</TableColumn>
                   <TableColumn>EMAIL</TableColumn>
@@ -106,15 +107,22 @@ export default function Home() {
                       <TableCell>{user.name}</TableCell>
                       <TableCell>{user.email}</TableCell>
                       <TableCell>{user.gender}</TableCell>
-                      <TableCell>+++</TableCell>
+                      <TableCell className="flex gap-2">
+                        <Button isIconOnly variant="ghost" color="primary" size="sm">
+                          <FontAwesomeIcon icon={faEye} />
+                        </Button>
+                        <Button isIconOnly variant="ghost" color="warning" size="sm">
+                          <FontAwesomeIcon icon={faPenToSquare} />
+                        </Button>
+                        <Button isIconOnly variant="ghost" color="danger" size="sm">
+                          <FontAwesomeIcon icon={faTrash} />
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   )}
                 </TableBody>
-
               </Table>
-
             </CardBody>
-
           </Card>
         </div>
       </div>
