@@ -1,17 +1,9 @@
 "use client";
 
 import {
-  faEye,
-  faPenToSquare,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Button,
   Card,
   CardBody,
   CardHeader,
-  Image,
   Table,
   TableBody,
   TableCell,
@@ -24,15 +16,21 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState, useMemo } from "react";
+import ButtonView from "./components/button/ButtonView";
+import ButtonEdit from "./components/button/ButtonEdit";
+import ButtonDelete from "./components/button/ButtonDelete";
+import ButtonCreateDriver from "./components/button/ButtonCreateDriver";
+import HomeImage from "./components/HomeImage";
 
 const base_url =
   "https://22f766af-a68f-4e84-bab4-b02cde04069a.mock.pstmn.io/admin/users";
 
 interface Iuser {
-  user_id: string;
-  name: string;
-  email: string;
-  gender: string;
+  user_id: string,
+  name: string,
+  email: string,
+  address: string,
+  gender: string
 }
 
 export default function Home() {
@@ -64,17 +62,12 @@ export default function Home() {
   return (
     <div className="w-full justify-center items-center flex flex-col">
       <div className="w-200">
-        <div className="h-100 overflow-hidden justify-center items-center flex rounded-2xl my-5">
-          <Image src="/img/image.png" alt="banner" />
-        </div>
-
+        <HomeImage />
         <div className="my-5">
           <Card>
             <CardHeader>
               <div className="w-full flex items-center justify-end">
-                <Button className="m-3" variant="ghost" color="warning">
-                  Create Driver
-                </Button>
+                <ButtonCreateDriver />
               </div>
             </CardHeader>
 
@@ -98,6 +91,7 @@ export default function Home() {
                   <TableColumn>NAME</TableColumn>
                   <TableColumn>EMAIL</TableColumn>
                   <TableColumn>GENDER</TableColumn>
+                  <TableColumn>ADDRESS</TableColumn>
                   <TableColumn>ACTION</TableColumn>
                 </TableHeader>
 
@@ -107,16 +101,11 @@ export default function Home() {
                       <TableCell>{user.name}</TableCell>
                       <TableCell>{user.email}</TableCell>
                       <TableCell>{user.gender}</TableCell>
+                      <TableCell>{user.address}</TableCell>
                       <TableCell className="flex gap-2">
-                        <Button isIconOnly variant="ghost" color="primary" size="sm">
-                          <FontAwesomeIcon icon={faEye} />
-                        </Button>
-                        <Button isIconOnly variant="ghost" color="warning" size="sm">
-                          <FontAwesomeIcon icon={faPenToSquare} />
-                        </Button>
-                        <Button isIconOnly variant="ghost" color="danger" size="sm">
-                          <FontAwesomeIcon icon={faTrash} />
-                        </Button>
+                        <ButtonView />
+                        <ButtonEdit />
+                        <ButtonDelete />
                       </TableCell>
                     </TableRow>
                   )}

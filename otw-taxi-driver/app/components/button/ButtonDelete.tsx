@@ -1,0 +1,13 @@
+"use client";
+
+import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@heroui/react";
+
+export default function ButtonDelete() {
+  return (
+    <Button isIconOnly variant="ghost" color="danger" size="sm">
+                          <FontAwesomeIcon icon={faTrash} />
+                        </Button>
+  );
+}
