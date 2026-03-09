@@ -31,6 +31,9 @@ export default function Home() {
             </p>
           </CardBody>
         </Card>
+        <div className="h-100 overflow-clip justify-center items-center flex rounded-2xl my-5">
+          <Image src="img/image.png" alt="" className="" />
+        </div>
       </div>
     </div>
   );
