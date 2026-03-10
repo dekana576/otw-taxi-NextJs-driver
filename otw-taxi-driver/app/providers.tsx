@@ -12,7 +12,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <HeroUIProvider>
-        <ToastProvider />
+        <ToastProvider placement="top-right" />
         {children}
       </HeroUIProvider>
     </QueryClientProvider>

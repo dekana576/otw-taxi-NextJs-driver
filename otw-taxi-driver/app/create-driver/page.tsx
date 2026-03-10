@@ -20,7 +20,7 @@ import { useState } from "react";
 const base_url =
   "https://22f766af-a68f-4e84-bab4-b02cde04069a.mock.pstmn.io/auth/register";
 
-/* ---------------- FORM COMPONENTS ---------------- */
+
 
 function MyInput({ label, ...props }: any) {
   const [field, meta] = useField(props);
@@ -32,6 +32,7 @@ function MyInput({ label, ...props }: any) {
       variant="bordered"
       isInvalid={meta.touched && !!meta.error}
       errorMessage={meta.touched && meta.error}
+      isRequired
     />
   );
 }
@@ -46,11 +47,11 @@ function MyTextarea({ label, ...props }: any) {
       variant="bordered"
       isInvalid={meta.touched && !!meta.error}
       errorMessage={meta.touched && meta.error}
+      isRequired
     />
   );
 }
 
-/* ---------------- PAGE ---------------- */
 
 export default function CreateDriver() {
   const [error, setError] = useState<Error | null>(null);
@@ -90,7 +91,7 @@ export default function CreateDriver() {
 
                 console.log("Driver created:", response.data);
                 addToast({
-                  title: "Create Driver",
+                  title: "Create Driver Success",
                   description: "Driver Created Successfully",
                   color: "primary",
                   timeout: 3000,
@@ -99,7 +100,9 @@ export default function CreateDriver() {
                 resetForm();
               } catch (err: any) {
                 const message =
-                err.response.data.message || err.message || "Something went wrong";
+                  err.response.data.message ||
+                  err.message ||
+                  "Something went wrong";
 
                 addToast({
                   title: "Create Driver Failed",
@@ -113,17 +116,17 @@ export default function CreateDriver() {
           >
             {({ isSubmitting, setFieldValue, values, errors, touched }) => (
               <Form className="flex flex-col gap-5 px-5">
-                <MyInput name="name" label="Name" />
+                <MyInput name="name" label="Name"/>
 
                 <MyInput name="email" label="Email" />
 
-                {/* RADIO GROUP */}
                 <RadioGroup
                   label="Select gender"
                   value={values.gender}
                   onValueChange={(value) => setFieldValue("gender", value)}
                   isInvalid={touched.gender && !!errors.gender}
                   errorMessage={touched.gender && errors.gender}
+                  isRequired
                 >
                   <div className="flex gap-5">
                     <Radio value="Male">Male</Radio>
@@ -133,12 +136,12 @@ export default function CreateDriver() {
 
                 <MyTextarea name="address" label="Address" />
 
-                {/* BUTTON */}
                 <div className="flex flex-row-reverse gap-2 my-5">
                   <Button
                     type="submit"
                     color="primary"
                     isLoading={isSubmitting}
+                    className="w-70 md:w-30"
                   >
                     Submit
                   </Button>
