@@ -17,6 +17,7 @@
     "@heroui/react": "^2.8.10",
     "@tanstack/react-query": "^5.90.21",
     "axios": "^1.13.6",
+    "formik": "^2.4.9",
     "framer-motion": "^12.35.1",
     "next": "16.1.6",
     "react": "19.2.3",
