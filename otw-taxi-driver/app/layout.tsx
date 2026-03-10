@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
-import HomeNavbar from "./components/HomeNavbar";
+import HomeNavbar from "./components/layout/HomeNavbar";
 import "@fortawesome/fontawesome-svg-core";
 import { config } from "@fortawesome/fontawesome-svg-core";
 
@@ -34,9 +34,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <HomeNavbar/>
-          {children}
-          </Providers>
+          <HomeNavbar />
+          <div className="w-full justify-center items-center flex flex-col">
+            <div className="w-100 md:w-200">{children}</div>
+          </div>
+        </Providers>
       </body>
     </html>
   );

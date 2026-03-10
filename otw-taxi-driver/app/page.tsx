@@ -16,21 +16,22 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState, useMemo } from "react";
-import ButtonView from "./components/button/ButtonView";
-import ButtonEdit from "./components/button/ButtonEdit";
-import ButtonDelete from "./components/button/ButtonDelete";
-import ButtonCreateDriver from "./components/button/ButtonCreateDriver";
-import HomeImage from "./components/HomeImage";
+import ButtonView from "./components/fragments/button/ButtonView";
+import ButtonEdit from "./components/fragments/button/ButtonEdit";
+import ButtonDelete from "./components/fragments/button/ButtonDelete";
+import ButtonCreateDriver from "./components/fragments/button/ButtonCreateDriver";
+import HomeImage from "./components/fragments/HomeImage";
+import SearchBar from "./components/fragments/SearchBar";
 
 const base_url =
   "https://22f766af-a68f-4e84-bab4-b02cde04069a.mock.pstmn.io/admin/users";
 
 interface Iuser {
-  user_id: string,
-  name: string,
-  email: string,
-  address: string,
-  gender: string
+  user_id: string;
+  name: string;
+  email: string;
+  address: string;
+  gender: string;
 }
 
 export default function Home() {
@@ -60,61 +61,60 @@ export default function Home() {
   }
 
   return (
-    <div className="w-full justify-center items-center flex flex-col">
-      <div className="w-100 md:w-200">
-        <HomeImage />
-        <div className="my-5">
-          <Card>
-            <CardHeader>
-              <div className="w-full flex items-center justify-end">
-                <ButtonCreateDriver />
-              </div>
-            </CardHeader>
+    <>
+      <HomeImage />
+      <div className="my-5">
+        <Card>
+          <CardHeader>
+            <div className="w-full flex items-center justify-between">
+              <SearchBar />
+              <ButtonCreateDriver />
+            </div>
+          </CardHeader>
 
-            <CardBody>
-              <Table
-                isStriped
-                aria-label="Users table"
-                bottomContent={
-                  <div className="flex w-full justify-center">
-                    <Pagination
-                      isCompact
-                      showControls
-                      page={page}
-                      total={pages}
-                      onChange={(page) => setPage(page)}
-                    />
-                  </div>
-                }
-              >
-                <TableHeader>
-                  <TableColumn>NAME</TableColumn>
-                  <TableColumn>EMAIL</TableColumn>
-                  <TableColumn>GENDER</TableColumn>
-                  <TableColumn>ADDRESS</TableColumn>
-                  <TableColumn>ACTION</TableColumn>
-                </TableHeader>
+          <CardBody>
+            <Table
+              isStriped
+              aria-label="Users table"
+              bottomContent={
+                <div className="flex w-full justify-center">
+                  <Pagination
+                    isCompact
+                    showControls
+                    page={page}
+                    total={pages}
+                    onChange={(page) => setPage(page)}
+                  />
+                </div>
+              }
+            >
+              <TableHeader>
+                <TableColumn>NAME</TableColumn>
+                <TableColumn>EMAIL</TableColumn>
+                <TableColumn>GENDER</TableColumn>
+                <TableColumn>ADDRESS</TableColumn>
+                <TableColumn>ACTION</TableColumn>
+              </TableHeader>
 
-                <TableBody items={items}>
-                  {(user) => (
-                    <TableRow key={user.user_id}>
-                      <TableCell>{user.name}</TableCell>
-                      <TableCell>{user.email}</TableCell>
-                      <TableCell>{user.gender}</TableCell>
-                      <TableCell>{user.address}</TableCell>
-                      <TableCell className="flex gap-2">
-                        <ButtonView />
-                        <ButtonEdit />
-                        <ButtonDelete />
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </CardBody>
-          </Card>
-        </div>
+              <TableBody items={items}>
+                {(user) => (
+                  <TableRow key={user.user_id}>
+                    <TableCell>{user.name}</TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.gender}</TableCell>
+                    <TableCell>{user.address}</TableCell>
+                    <TableCell className="flex gap-2">
+                      <ButtonView />
+                      <ButtonEdit />
+                      <ButtonDelete />
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </CardBody>
+        </Card>
       </div>
-    </div>
+    </>
   );
 }
