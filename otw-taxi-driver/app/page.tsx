@@ -76,7 +76,7 @@ export default function Home() {
       addToast({
         title: "Delete Driver Success",
         description: "Driver Deleted Successfully",
-        color: "primary",
+        color: "success",
         timeout: 3000,
         shouldShowTimeoutProgress: true,
       });

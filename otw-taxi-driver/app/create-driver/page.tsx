@@ -93,7 +93,7 @@ export default function CreateDriver() {
                 addToast({
                   title: "Create Driver Success",
                   description: "Driver Created Successfully",
-                  color: "primary",
+                  color: "success",
                   timeout: 3000,
                   shouldShowTimeoutProgress: true,
                 });
