@@ -22,6 +22,8 @@ import ButtonDelete from "./components/fragments/button/ButtonDelete";
 import ButtonCreateDriver from "./components/fragments/button/ButtonCreateDriver";
 import HomeImage from "./components/fragments/HomeImage";
 import SearchBar from "./components/fragments/SearchBar";
+import HomeLoading from "./components/page/HomeLoading";
+
 
 const base_url =
   "https://22f766af-a68f-4e84-bab4-b02cde04069a.mock.pstmn.io/admin/users";
@@ -57,7 +59,7 @@ export default function Home() {
   }, [page, users]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <HomeLoading/>;
   }
 
   return (
