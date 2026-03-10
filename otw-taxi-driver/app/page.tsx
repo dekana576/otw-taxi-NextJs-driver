@@ -61,7 +61,7 @@ export default function Home() {
 
   return (
     <div className="w-full justify-center items-center flex flex-col">
-      <div className="w-200">
+      <div className="w-100 md:w-200">
         <HomeImage />
         <div className="my-5">
           <Card>
