@@ -11,9 +11,10 @@ import {
   TableHeader,
   TableRow,
   Pagination,
+  addToast,
 } from "@heroui/react";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState, useMemo } from "react";
 import ButtonView from "./components/fragments/button/ButtonView";
@@ -23,7 +24,7 @@ import ButtonCreateDriver from "./components/fragments/button/ButtonCreateDriver
 import HomeImage from "./components/fragments/HomeImage";
 import SearchBar from "./components/fragments/SearchBar";
 import HomeLoading from "./components/page/HomeLoading";
-
+import ConfirmDelete from "./components/fragments/ConfirmDelete";
 
 const base_url =
   "https://22f766af-a68f-4e84-bab4-b02cde04069a.mock.pstmn.io/admin/users";
@@ -37,6 +38,7 @@ interface Iuser {
 }
 
 export default function Home() {
+  const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
   const rowsPerPage = 5;
 
@@ -59,8 +61,36 @@ export default function Home() {
   }, [page, users]);
 
   if (isLoading) {
-    return <HomeLoading/>;
+    return <HomeLoading />;
   }
+
+  const handleDelete = async (user_id: string) => {
+    try {
+      await axios.delete(base_url, {
+        params: { user_id },
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["users"],
+      });
+      addToast({
+        title: "Delete Driver Success",
+        description: "Driver Deleted Successfully",
+        color: "primary",
+        timeout: 3000,
+        shouldShowTimeoutProgress: true,
+      });
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      addToast({
+        title: "Delete Driver",
+        description: "Driver Delete Failed",
+        color: "danger",
+        timeout: 3000,
+        shouldShowTimeoutProgress: true,
+      });
+    }
+  };
 
   return (
     <>
@@ -108,7 +138,9 @@ export default function Home() {
                     <TableCell className="flex gap-2">
                       <ButtonView />
                       <ButtonEdit />
-                      <ButtonDelete />
+                      <ConfirmDelete
+                        onConfirm={() => handleDelete(user.user_id)}
+                      />
                     </TableCell>
                   </TableRow>
                 )}
